@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+
+cmake-build-*
+CMakeLists.txt.user
+src/buildnumber.h
+output

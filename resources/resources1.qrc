@@ -1,0 +1,7 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource>
+    <file>MFDHelp.txt</file>
+    <file>icon128.png</file>
+    </qresource>
+</RCC>
