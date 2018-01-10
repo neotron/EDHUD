@@ -25,10 +25,10 @@ using namespace Journal;
 #define FMTK(X) ((X) < 10000 ? QString::number(X) : QString("%1k").arg(round((X)/1000.0)))
 bool ScanMFDPage::update(const JournalFile &journal, EventPtr ev) {
     switch(ev->type()) {
-    case EventTypeScan:
+    case Event::Scan:
         processScanEvent(ev->scan());
         return true;
-    case EventTypeStartJump:
+    case Event::StartJump:
         if(ev->string("JumpType") == "Hyperspace") {
             _currentLine = 0;
             _lines.clear();
@@ -39,7 +39,7 @@ bool ScanMFDPage::update(const JournalFile &journal, EventPtr ev) {
         }
         return false;
 
-    case EventTypeFSDJump:
+    case Event::FSDJump:
         _lines.clear();
         _lines.append("Arrived in:");
         _lines.append(journal.system());

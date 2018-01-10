@@ -31,13 +31,13 @@ MaterialLogMFDPage::MaterialLogMFDPage(QObject *parent) : MFDPage(parent) {
 bool MaterialLogMFDPage::update(const JournalFile &journal, Journal::EventPtr ev) {
     bool didChange = false;
     switch(ev->type()) {
-    case EventTypeMaterialCollected:
+    case Event::MaterialCollected:
         didChange = changeMaterial(ev->string("Name"), ev->integer("Count"));
         break;
-    case EventTypeMaterialDiscarded:
+    case Event::MaterialDiscarded:
         didChange = changeMaterial(ev->string("Name"), -ev->integer("Count"));
         break;
-    case EventTypeSynthesis:
+    case Event::Synthesis:
     default:
         break;
     }

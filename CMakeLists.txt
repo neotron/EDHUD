@@ -84,10 +84,10 @@ endif ()
 file(GLOB_RECURSE PATH_FINDER_SRC ${PFDIR}/*.cpp ${PFDIR}/*.h )
 file(GLOB_RECURSE SRC_FILES src/*.cpp src/*.h src/*.ui)
 
-header_directories(INCLUDE_DIRS src/ "${PROJECT_SOURCE_DIR}")
+header_directories(INCLUDE_DIRS src/ "${PROJECT_SOURCE_DIR}" )
 
-include_directories(SYSTEM ${ORTOOLS}/include/ "deps/EDJournalQT/src")
-include_directories(AFTER ${INCLUDE_DIRS})
+include_directories(SYSTEM ${ORTOOLS}/include/ )
+include_directories(AFTER ${INCLUDE_DIRS} "deps/EDJournalQT/src")
 add_executable(${PROJECT_NAME} ${OS_BUNDLE} # Expands to WIN32 or MACOS_BUNDLE depending on OS
     ${SRC_FILES} ${META_FILES_TO_INCLUDE} ${RESOURCE_FILES} ${PATH_FINDER_SRC}  ${DOUTPUT}
 )

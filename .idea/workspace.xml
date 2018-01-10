@@ -18,16 +18,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6c196e4-6c94-4525-afec-fba14f4ee4a5" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/EDHUD.iml" afterPath="$PROJECT_DIR$/.idea/EDHUD.iml" />
       <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/EDHUD.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/EDHUD.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
+      <change beforePath="$PROJECT_DIR$/Makefile" afterPath="$PROJECT_DIR$/Makefile" />
+      <change beforePath="$PROJECT_DIR$/cmake/installer.nsi.in" afterPath="$PROJECT_DIR$/cmake/installer.nsi.in" />
       <change beforePath="$PROJECT_DIR$/deps/EDJournalQT" afterPath="$PROJECT_DIR$/deps/EDJournalQT" />
+      <change beforePath="$PROJECT_DIR$/resources/resources1.qrc" afterPath="$PROJECT_DIR$/resources/resources1.qrc" />
+      <change beforePath="$PROJECT_DIR$/src/Settings/Preferences.cpp" afterPath="$PROJECT_DIR$/src/Settings/Preferences.cpp" />
+      <change beforePath="$PROJECT_DIR$/src/Settings/Preferences.h" afterPath="$PROJECT_DIR$/src/Settings/Preferences.h" />
+      <change beforePath="$PROJECT_DIR$/src/Settings/Preferences.ui" afterPath="$PROJECT_DIR$/src/Settings/Preferences.ui" />
+      <change beforePath="$PROJECT_DIR$/src/Settings/Settings.cpp" afterPath="$PROJECT_DIR$/src/Settings/Settings.cpp" />
+      <change beforePath="$PROJECT_DIR$/src/Settings/Settings.h" afterPath="$PROJECT_DIR$/src/Settings/Settings.h" />
+      <change beforePath="$PROJECT_DIR$/src/Settings/Theme.cpp" afterPath="$PROJECT_DIR$/src/Settings/Theme.cpp" />
+      <change beforePath="$PROJECT_DIR$/src/Settings/Theme.h" afterPath="$PROJECT_DIR$/src/Settings/Theme.h" />
       <change beforePath="$PROJECT_DIR$/src/UI/MainWindow.cpp" afterPath="$PROJECT_DIR$/src/UI/MainWindow.cpp" />
       <change beforePath="$PROJECT_DIR$/src/UI/MainWindow.h" afterPath="$PROJECT_DIR$/src/UI/MainWindow.h" />
       <change beforePath="$PROJECT_DIR$/src/UI/MainWindow.ui" afterPath="$PROJECT_DIR$/src/UI/MainWindow.ui" />
+      <change beforePath="$PROJECT_DIR$/src/Utility/AutoUpdateChecker.cpp" afterPath="$PROJECT_DIR$/src/Utility/AutoUpdateChecker.cpp" />
+      <change beforePath="$PROJECT_DIR$/src/Utility/AutoUpdateChecker.h" afterPath="$PROJECT_DIR$/src/Utility/AutoUpdateChecker.h" />
+      <change beforePath="$PROJECT_DIR$/src/Utility/Version.cpp" afterPath="$PROJECT_DIR$/src/Utility/Version.cpp" />
+      <change beforePath="$PROJECT_DIR$/src/Utility/Version.h" afterPath="$PROJECT_DIR$/src/Utility/Version.h" />
+      <change beforePath="$PROJECT_DIR$/src/X52Pro/DirectOutputCallbacks.h" afterPath="$PROJECT_DIR$/src/X52Pro/DirectOutputCallbacks.h" />
+      <change beforePath="$PROJECT_DIR$/src/X52Pro/MFDPage.cpp" afterPath="$PROJECT_DIR$/src/X52Pro/MFDPage.cpp" />
+      <change beforePath="$PROJECT_DIR$/src/X52Pro/MFDPage.h" afterPath="$PROJECT_DIR$/src/X52Pro/MFDPage.h" />
+      <change beforePath="$PROJECT_DIR$/src/X52Pro/MaterialLogMFDPage.cpp" afterPath="$PROJECT_DIR$/src/X52Pro/MaterialLogMFDPage.cpp" />
+      <change beforePath="$PROJECT_DIR$/src/X52Pro/MaterialLogMFDPage.h" afterPath="$PROJECT_DIR$/src/X52Pro/MaterialLogMFDPage.h" />
+      <change beforePath="$PROJECT_DIR$/src/X52Pro/ScanMFDPage.cpp" afterPath="$PROJECT_DIR$/src/X52Pro/ScanMFDPage.cpp" />
+      <change beforePath="$PROJECT_DIR$/src/X52Pro/ScanMFDPage.h" afterPath="$PROJECT_DIR$/src/X52Pro/ScanMFDPage.h" />
+      <change beforePath="$PROJECT_DIR$/src/X52Pro/X52ProMFD.cpp" afterPath="$PROJECT_DIR$/src/X52Pro/X52ProMFD.cpp" />
+      <change beforePath="$PROJECT_DIR$/src/X52Pro/X52ProMFD.h" afterPath="$PROJECT_DIR$/src/X52Pro/X52ProMFD.h" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" afterPath="$PROJECT_DIR$/src/main.cpp" />
+      <change beforePath="$PROJECT_DIR$/wininstall/installer.nsi" afterPath="$PROJECT_DIR$/wininstall/installer.nsi" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/cmake-build-relwithdebinfo/" />
@@ -41,250 +70,194 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:MinSizeRel" />
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf>
-          <file leaf-file-name="MFDPage.cpp" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/X52Pro/MFDPage.cpp">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="270">
-                  <caret line="15" column="2" lean-forward="false" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="X52ProMFD.cpp" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/X52Pro/X52ProMFD.cpp">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="462">
-                  <caret line="71" column="1" lean-forward="false" selection-start-line="71" selection-start-column="1" selection-end-line="71" selection-end-column="1" />
-                  <folding>
-                    <element signature="e#760#777#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="StellarBody.cpp" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/Types/StellarBody.cpp">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-430">
-                  <caret line="38" column="50" lean-forward="false" selection-start-line="38" selection-start-column="50" selection-end-line="38" selection-end-column="50" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="JournalWatcher.h" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/JournalWatcher.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="399">
-                  <caret line="38" column="62" lean-forward="false" selection-start-line="38" selection-start-column="62" selection-end-line="38" selection-end-column="62" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="JournalWatcher.cpp" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/JournalWatcher.cpp">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="540">
-                  <caret line="50" column="18" lean-forward="false" selection-start-line="50" selection-start-column="18" selection-end-line="50" selection-end-column="18" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="LiveJournal.h" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/LiveJournal.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="417">
-                  <caret line="36" column="54" lean-forward="false" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
-                  <folding>
-                    <element signature="e#788#815#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="LiveJournal.cpp" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/LiveJournal.cpp">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="470">
-                  <caret line="34" column="26" lean-forward="false" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="StellarBody.h" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/Types/StellarBody.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="92">
-                  <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="qobjectdefs.h" pinned="false" current-in-tab="false">
-            <entry file="file://C:/User Programs/Qt/5.9.3/msvc2015_64/include/QtCore/qobjectdefs.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="265">
-                  <caret line="276" column="9" lean-forward="false" selection-start-line="276" selection-start-column="9" selection-end-line="276" selection-end-column="9" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="StellarBodesTables.h" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/Types/StellarBodesTables.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="344">
-                  <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-                  <folding>
-                    <element signature="e#735#753#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="JournalFile.h" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/JournalFile.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-322">
-                  <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-                  <folding>
-                    <element signature="e#736#752#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ScanMFDPage.cpp" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/X52Pro/ScanMFDPage.cpp">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="531">
-                  <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-                  <folding>
-                    <element signature="e#763#780#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="installer.nsi.in" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/cmake/installer.nsi.in">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="21">
-                  <caret line="34" column="11" lean-forward="false" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Planet.cpp" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/Types/Planet.cpp">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-2250">
-                  <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-                  <folding>
-                    <element signature="e#722#740#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="X52ProMFD.h" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/X52Pro/X52ProMFD.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="308">
-                  <caret line="25" column="24" lean-forward="false" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
-                  <folding>
-                    <element signature="e#766#783#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Event.h" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/Events/Event.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="630">
-                  <caret line="208" column="71" lean-forward="false" selection-start-line="208" selection-start-column="71" selection-end-line="208" selection-end-column="71" />
-                  <folding>
-                    <element signature="e#737#755#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="MaterialLogMFDPage.h" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/X52Pro/MaterialLogMFDPage.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="468">
-                  <caret line="26" column="73" lean-forward="false" selection-start-line="26" selection-start-column="73" selection-end-line="26" selection-end-column="73" />
-                  <folding>
-                    <element signature="e#735#755#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="MaterialLogMFDPage.cpp" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/X52Pro/MaterialLogMFDPage.cpp">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="372">
-                  <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-                  <folding>
-                    <element signature="e#770#787#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="MFDPage.h" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/X52Pro/MFDPage.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="452">
-                  <caret line="39" column="81" lean-forward="false" selection-start-line="39" selection-start-column="60" selection-end-line="39" selection-end-column="81" />
-                  <folding>
-                    <element signature="e#770#790#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="JournalFile.cpp" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/JournalFile.cpp">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="236">
-                  <caret line="46" column="22" lean-forward="false" selection-start-line="46" selection-start-column="22" selection-end-line="46" selection-end-column="22" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="Star.cpp" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/Types/Star.cpp">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="332">
-                  <caret line="62" column="39" lean-forward="false" selection-start-line="62" selection-start-column="39" selection-end-line="62" selection-end-column="39" />
-                  <folding>
-                    <element signature="e#722#740#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file leaf-file-name="MFDPage.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/X52Pro/MFDPage.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="15" column="2" lean-forward="false" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="X52ProMFD.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/X52Pro/X52ProMFD.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="462">
+              <caret line="71" column="1" lean-forward="false" selection-start-line="71" selection-start-column="1" selection-end-line="71" selection-end-column="1" />
+              <folding>
+                <element signature="e#760#777#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StellarBody.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/Types/StellarBody.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="308">
+              <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="393">
+              <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Star.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/Types/Star.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="332">
+              <caret line="62" column="39" lean-forward="false" selection-start-line="62" selection-start-column="39" selection-end-line="62" selection-end-column="39" />
+              <folding>
+                <element signature="e#722#740#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JournalWatcher.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/JournalWatcher.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="38" column="62" lean-forward="false" selection-start-line="38" selection-start-column="62" selection-end-line="38" selection-end-column="62" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JournalWatcher.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/JournalWatcher.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="540">
+              <caret line="50" column="18" lean-forward="false" selection-start-line="50" selection-start-column="18" selection-end-line="50" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LiveJournal.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/LiveJournal.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="417">
+              <caret line="36" column="54" lean-forward="false" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
+              <folding>
+                <element signature="e#788#815#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LiveJournal.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/LiveJournal.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="470">
+              <caret line="34" column="26" lean-forward="false" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StellarBody.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/Types/StellarBody.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="92">
+              <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="qobjectdefs.h" pinned="false" current-in-tab="false">
+        <entry file="file://C:/User Programs/Qt/5.9.3/msvc2015_64/include/QtCore/qobjectdefs.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="265">
+              <caret line="276" column="9" lean-forward="false" selection-start-line="276" selection-start-column="9" selection-end-line="276" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StellarBodesTables.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/Types/StellarBodesTables.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="344">
+              <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+              <folding>
+                <element signature="e#735#753#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JournalFile.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/JournalFile.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-322">
+              <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+              <folding>
+                <element signature="e#736#752#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="X52ProMFD.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/X52Pro/X52ProMFD.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="308">
+              <caret line="25" column="24" lean-forward="false" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
+              <folding>
+                <element signature="e#766#783#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Event.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/Events/Event.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="738">
+              <caret line="214" column="62" lean-forward="false" selection-start-line="214" selection-start-column="62" selection-end-line="214" selection-end-column="62" />
+              <folding>
+                <element signature="e#737#755#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MaterialLogMFDPage.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/X52Pro/MaterialLogMFDPage.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="372">
+              <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+              <folding>
+                <element signature="e#770#787#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JournalFile.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/JournalFile.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="236">
+              <caret line="46" column="22" lean-forward="false" selection-start-line="46" selection-start-column="22" selection-end-line="46" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -295,8 +268,8 @@
       <find>bodyname</find>
       <find>auInLS</find>
       <find>habzone</find>
-      <find>Star:L</find>
       <find>PROGRAMFILES</find>
+      <find>Star:L</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -337,7 +310,6 @@
         <option value="$PROJECT_DIR$/deps/EDJournalQT/src/Types/StellarBody.h" />
         <option value="$PROJECT_DIR$/src/UI/MainWindow.cpp" />
         <option value="$PROJECT_DIR$/deps/EDJournalQT/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/deps/EDJournalQT/src/Events/Event.cpp" />
         <option value="$PROJECT_DIR$/deps/EDJournalQT/src/JournalFile.cpp" />
         <option value="$PROJECT_DIR$/src/X52Pro/MFDPage.h" />
@@ -356,6 +328,7 @@
         <option value="$PROJECT_DIR$/deps/EDJournalQT/src/Types/StellarBody.cpp" />
         <option value="$PROJECT_DIR$/src/X52Pro/ScanMFDPage.cpp" />
         <option value="$PROJECT_DIR$/cmake/installer.nsi.in" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
       </list>
     </option>
   </component>
@@ -367,10 +340,9 @@
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+    <option name="x" value="-7" />
     <option name="width" value="1734" />
-    <option name="height" value="707" />
+    <option name="height" value="1407" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -576,7 +548,7 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24985372" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3293556" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3293556" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932693" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293556" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -792,22 +764,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="18" column="6" lean-forward="false" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="78" column="47" lean-forward="false" selection-start-line="78" selection-start-column="47" selection-end-line="78" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/User Programs/Visual Studio Community 2015/VC/include/memory">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
@@ -831,7 +787,7 @@
         <state relative-caret-position="452">
           <caret line="39" column="81" lean-forward="false" selection-start-line="39" selection-start-column="60" selection-end-line="39" selection-end-column="81" />
           <folding>
-            <element signature="e#770#790#0" expanded="true" />
+            <element signature="e#770#790#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -841,7 +797,7 @@
         <state relative-caret-position="468">
           <caret line="26" column="73" lean-forward="false" selection-start-line="26" selection-start-column="73" selection-end-line="26" selection-end-column="73" />
           <folding>
-            <element signature="e#735#755#0" expanded="true" />
+            <element signature="e#735#755#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -876,8 +832,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/Events/Event.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="208" column="71" lean-forward="false" selection-start-line="208" selection-start-column="71" selection-end-line="208" selection-end-column="71" />
+        <state relative-caret-position="738">
+          <caret line="214" column="62" lean-forward="false" selection-start-line="214" selection-start-column="62" selection-end-line="214" selection-end-column="62" />
           <folding>
             <element signature="e#737#755#0" expanded="true" />
           </folding>
@@ -1004,21 +960,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/Types/StellarBody.cpp">
+    <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-430">
-          <caret line="38" column="50" lean-forward="false" selection-start-line="38" selection-start-column="50" selection-end-line="38" selection-end-column="50" />
+        <state relative-caret-position="378">
+          <caret line="21" column="30" lean-forward="false" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/Types/Planet.cpp">
+    <entry file="file://$PROJECT_DIR$/cmake/installer.nsi.in">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2250">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding>
-            <element signature="e#722#740#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="21">
+          <caret line="34" column="11" lean-forward="false" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1027,7 +981,17 @@
         <state relative-caret-position="531">
           <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
           <folding>
-            <element signature="e#763#780#0" expanded="true" />
+            <element signature="e#763#780#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/Types/Planet.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2250">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <element signature="e#722#740#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1042,10 +1006,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cmake/installer.nsi.in">
+    <entry file="file://$PROJECT_DIR$/deps/EDJournalQT/src/Types/StellarBody.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="34" column="11" lean-forward="false" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
+        <state relative-caret-position="308">
+          <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
           <folding />
         </state>
       </provider>
