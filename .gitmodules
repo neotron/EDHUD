@@ -1,0 +1,4 @@
+[submodule "deps/EDJournalQT"]
+	path = deps/EDJournalQT
+	url = git@github.com:neotron/EDJournalQT.git
+	branch = master

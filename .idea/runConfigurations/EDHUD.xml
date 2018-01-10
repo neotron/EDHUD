@@ -1,0 +1,6 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="EDHUD" type="CMakeRunConfiguration" factoryName="Application" singleton="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="EDHUD" TARGET_NAME="EDHUD" CONFIG_NAME="RelWithDebInfo" RUN_TARGET_PROJECT_NAME="EDHUD" RUN_TARGET_NAME="EDHUD">
+    <envs />
+    <method />
+  </configuration>
+</component>
