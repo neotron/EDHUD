@@ -35,3 +35,4 @@ cmake-build-*
 CMakeLists.txt.user
 src/buildnumber.h
 output
+/.idea/workspace.xml

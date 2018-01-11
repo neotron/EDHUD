@@ -20,7 +20,6 @@
 #include <QDebug>
 #include <Types/Materials.h>
 #include <JournalFile.h>
-#endif
 
 using namespace Journal;
 
@@ -101,3 +100,4 @@ void MaterialLogMFDPage::updateLines() {
         }
     }
 }
+#endif
