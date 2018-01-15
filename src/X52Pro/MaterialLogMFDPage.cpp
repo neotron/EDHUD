@@ -23,28 +23,9 @@
 
 using namespace Journal;
 
-MaterialLogMFDPage::MaterialLogMFDPage(QObject *parent) : MFDPage(parent) {
+MaterialLogMFDPage::MaterialLogMFDPage(QObject *parent, DWORD pageId)
+    : MFDPage(parent, pageId) {
     updateLines();
-}
-
-bool MaterialLogMFDPage::update(const JournalFile &journal, Journal::EventPtr ev) {
-    bool didChange = false;
-    switch(ev->type()) {
-    case Event::MaterialCollected:
-        didChange = changeMaterial(ev->string("Name"), ev->integer("Count"));
-        break;
-    case Event::MaterialDiscarded:
-        didChange = changeMaterial(ev->string("Name"), -ev->integer("Count"));
-        break;
-    case Event::Synthesis:
-    default:
-        break;
-    }
-
-    if(didChange) {
-        updateLines();
-    }
-    return didChange;
 }
 
 //1234567890123456
@@ -57,17 +38,17 @@ bool MaterialLogMFDPage::scrollWheelclick() {
     return true;
 }
 
-bool MaterialLogMFDPage::changeMaterial(const QString &materialName, int delta) {
-    if(!delta) { return false; }
+void MaterialLogMFDPage::changeMaterial(const QString &materialName, int64_t delta) {
+    if(!delta) { return; }
 
     auto material = Materials::material(materialName);
-    if(!material.isValid()) {
-        return false;
+    if(material.isValid()) {
+        _materalDeltas[materialName] += delta;
+        _changeOrder.removeAll(materialName);
+        _changeOrder.insert(0, materialName);
+        updateLines();
+        notifyChange();
     }
-    _materalDeltas[materialName] += delta;
-    _changeOrder.removeAll(materialName);
-    _changeOrder.insert(0, materialName);
-    return true;
 }
 
 void MaterialLogMFDPage::updateLines() {
@@ -100,4 +81,19 @@ void MaterialLogMFDPage::updateLines() {
         }
     }
 }
+
+void MaterialLogMFDPage::onEventGeneric(Event *event) {
+    switch(event->journalEvent()) {
+        case Event::MaterialCollected:
+            changeMaterial(event->string("Name"), event->integer("Count"));
+            break;
+        case Event::MaterialDiscarded:
+            changeMaterial(event->string("Name"), -event->integer("Count"));
+            break;
+        case Event::Synthesis:
+        default:
+            break;
+    }
+}
+
 #endif

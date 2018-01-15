@@ -23,51 +23,48 @@
 using namespace Journal;
 
 #define FMTK(X) ((X) < 10000 ? QString::number(X) : QString("%1k").arg(round((X)/1000.0)))
-bool ScanMFDPage::update(const JournalFile &journal, EventPtr ev) {
-    switch(ev->type()) {
-    case Event::Scan:
-        processScanEvent(ev->scan());
-        return true;
-    case Event::StartJump:
-        if(ev->string("JumpType") == "Hyperspace") {
-            _currentLine = 0;
-            _lines.clear();
-            _lines.append("Jumping to");
-            _lines.append(ev->string("StarSystem"));
-            _lines.append("Class "+ev->string("StarClass"));
-            return true;
-        }
-        return false;
 
-    case Event::FSDJump:
-        _lines.clear();
-        _lines.append("Arrived in:");
-        _lines.append(journal.system());
-        _lines.append("Pending scan...");
-        _history.clear();
-        _currentEntry = 0;
-        _currentLine = 0;
-        return true;
-    default:
-        return false;
+
+
+void ScanMFDPage::onEventGeneric(Event *event) {
+    switch(event->journalEvent()) {
+        case Event::StartJump:
+            if(event->string("JumpType") == "Hyperspace") {
+                _currentLine = 0;
+                _lines.clear();
+                _lines.append("Jumping to");
+                _lines.append(event->string("StarSystem"));
+                _lines.append("Class " + event->string("StarClass"));
+                notifyChange();
+            }
+            break;
+
+        case Event::FSDJump:
+            _lines.clear();
+            _lines.append("Arrived in:");
+            _lines.append(event->file()->system());
+            _lines.append("Pending scan...");
+            _history.clear();
+            _currentEntry = 0;
+            _currentLine = 0;
+            notifyChange();
+            break;
+        default:
+            break;
     }
 }
 
-void ScanMFDPage::processScanEvent(const EventScan *evs) {
-    if(!evs) {
-        return;
-    }
-
+void ScanMFDPage::onEventScan(EventScan *eventScan) {
     _lines.clear();
-    switch(evs->bodyType()) {
+    switch(eventScan->bodyType()) {
         case Body::Planet:
-            addScan(evs->planet());
+            addScan(eventScan->planet());
             break;
         case Body::Star:
-            addScan(evs->star());
+            addScan(eventScan->star());
             break;
         default:
-            _lines += evs->string("BodyName");
+            _lines += eventScan->string("BodyName");
             _lines += "Simple Body";
             _lines += "No Addl. Data";
             break; // No-op
@@ -76,9 +73,11 @@ void ScanMFDPage::processScanEvent(const EventScan *evs) {
 
     _history.append(_lines);
     _currentEntry = _history.size() - 1;
+    notifyChange();
 }
 
-ScanMFDPage::ScanMFDPage(QObject *parent) : MFDPage(parent) {
+ScanMFDPage::ScanMFDPage(QObject *parent, DWORD pageId)
+    : MFDPage(parent, pageId) {
     _lines.append(QString("Scan Summary\n\nPending Scan").split("\n"));
 }
 

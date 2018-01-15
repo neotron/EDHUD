@@ -58,8 +58,6 @@ X52ProMFD::X52ProMFD(QObject *parent) : QObject(parent) {
     createPages();
     _mfdUpdateTimer.setSingleShot(true);
     connect(&_mfdUpdateTimer, SIGNAL(timeout()), this, SLOT(updateCurrentPage()));
-    connect(LiveJournal::instance(), SIGNAL(onEvent(const JournalFile &, EventPtr)),
-            this, SLOT(handleEvent(const JournalFile &, EventPtr)));
 }
 
 X52ProMFD::~X52ProMFD() {
@@ -113,6 +111,7 @@ void X52ProMFD::onDeviceChanged(void *device, bool isAdded) {
 }
 
 void X52ProMFD::onPageChange(void *device, DWORD page, bool isSetActive) {
+    qDebug() << "Page changed" << page <<"to active"<<isSetActive;
     if(isSetActive) {
         _currentPage = page;
         updateCurrentPage();
@@ -169,27 +168,24 @@ void X52ProMFD::addDevicePages() {
 }
 
 void X52ProMFD::createPages() {
-    _pages[kScanSummaryPage] = new ScanMFDPage(this);
-    _pages[kMaterialLogPage] = new MaterialLogMFDPage(this);
+    _pages[kScanSummaryPage] = new ScanMFDPage(this, kScanSummaryPage);
+    _pages[kMaterialLogPage] = new MaterialLogMFDPage(this, kMaterialLogPage);
 
     QFile help(":/MFDHelp.txt");
     if(help.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        auto helpPage = new MFDPage(this);
+        auto helpPage = new MFDPage(this, kHelpPage);
         QStringList lines(QString(help.readAll()).split("\n"));
         helpPage->setLines(lines);
         _pages[kHelpPage] = helpPage;
     }
+    for(auto page: _pages.values()) {
+        connect(page, SIGNAL(onChange(DWORD)), this, SLOT(pageChanged(DWORD)));
+    }
 }
 
-void X52ProMFD::handleEvent(const JournalFile &journal, EventPtr event) {
-    qDebug() << "Handle Event "<<event->obj();
-    QSet<DWORD> modified;
-    for(DWORD page: _pages.keys()) {
-        if(_pages[page]->update(journal, event)) {
-            modified.insert(page);
-        }
-    }
-    if(modified.contains(_currentPage)) {
+void X52ProMFD::pageChanged(DWORD page) {
+    qDebug() << "Page"<<page<<"changed. Current ="<<_currentPage;
+    if(page == _currentPage) {
         _mfdUpdateTimer.start(100);
     }
 }

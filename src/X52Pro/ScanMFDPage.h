@@ -22,21 +22,22 @@
 
 class ScanMFDPage: public MFDPage {
 public:
-    explicit ScanMFDPage(QObject *parent);
-
-    bool update(const Journal::JournalFile &journal, Journal::EventPtr ev) override;
+    ScanMFDPage(QObject *parent, DWORD pageId);
 
     bool scrollWheelclick() override;
 
-    static QString shorthandBodyType(const QString &bodyType);
+protected:
+    void onEventScan(Journal::EventScan *eventScan) override;
+
+    void onEventGeneric(Journal::Event *event) override;
 
 private:
+    void addScan(Journal::PlanetPtr planet);
+    void addScan(Journal::StarPtr star);
+
     int _currentEntry{};
     QList<QStringList> _history{};
 
-    void processScanEvent(const Journal::EventScan *evs);
-    void addScan(Journal::PlanetPtr planet);
-    void addScan(Journal::StarPtr star);
 };
 
 #endif

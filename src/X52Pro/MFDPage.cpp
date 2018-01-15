@@ -17,6 +17,7 @@
 #include "MFDPage.h"
 #ifdef Q_OS_WIN
 #include <QDebug>
+#include <LiveJournal.h>
 
 QString MFDPage::textForLine(size_t line) const {
     // Calculate actual line using current offset.
@@ -45,7 +46,21 @@ DWORD MFDPage::numLines() const {
     return static_cast<DWORD>(_lines.count());
 }
 
-MFDPage::MFDPage(QObject *parent) : QObject(parent) {}
+
+MFDPage::MFDPage(QObject *parent, DWORD pageId)
+    : EventDispatch(parent), _pageId(pageId) {
+    Journal::LiveJournal::instance()->registerHandler(this);
+}
+
+bool MFDPage::scrollWheelclick() {
+    if(_currentLine > 0) {
+        _currentLine = 0;
+        return true;
+    }
+    return false;
+}
+
+void MFDPage::notifyChange() { emit onChange(_pageId); }
 
 #endif
 

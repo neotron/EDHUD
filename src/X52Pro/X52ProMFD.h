@@ -23,9 +23,6 @@
 #include "LiveJournal.h"
 #include "Events.h"
 
-using Journal::EventPtr;
-using Journal::JournalFile;
-
 class X52ProMFD: public QObject {
     Q_OBJECT
 public:
@@ -45,8 +42,8 @@ signals:
     void mfdPageChanged(const QString &page);
 
 public slots:
-    void handleEvent(const JournalFile &journal, EventPtr event);
     void updateCurrentPage();
+    void pageChanged(DWORD page);
 
 private:
 

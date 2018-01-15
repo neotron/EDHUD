@@ -22,17 +22,18 @@
 #ifdef Q_OS_WIN
 class MaterialLogMFDPage: public MFDPage {
 public:
-    explicit MaterialLogMFDPage(QObject *parent);
-
-    bool update(const Journal::JournalFile &journal, Journal::EventPtr ev) override;
+    MaterialLogMFDPage(QObject *parent, DWORD pageId);
 
     bool scrollWheelclick() override;
+
+protected:
+    void onEventGeneric(Journal::Event *event) override;
 
 private:
     QMap<QString,int> _materalDeltas{};
     QStringList _changeOrder;
 
-    bool changeMaterial(const QString &materialName, int delta);
+    void changeMaterial(const QString &materialName, int64_t delta);
 
     void updateLines();
 };

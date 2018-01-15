@@ -1,7 +1,7 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
+#include "EventDispatch.h"
 
 namespace Ui {
 class MainWindow;
@@ -11,13 +11,16 @@ class MainWindow;
 class X52ProMFD;
 #endif
 
-class MainWindow : public QMainWindow
+class MainWindow : public Journal::EventDispatchMainWindow
 {
     Q_OBJECT
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    ~MainWindow() override;
+
+protected:
+    void onEventGeneric(Journal::Event *event) override;
 
 private:
     Ui::MainWindow *_ui;
@@ -25,5 +28,3 @@ private:
     X52ProMFD *_mfd;
 #endif
 };
-
-#endif // MAINWINDOW_H

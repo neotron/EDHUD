@@ -1,23 +1,24 @@
+#include <QDebug>
 #include "Settings/Settings.h"
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 #ifdef Q_OS_WIN
 #include "X52ProMFD.h"
 #endif
-#include "LiveJournal.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    _ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent) 
+    : EventDispatchMainWindow(parent), _ui(new Ui::MainWindow)
 #ifdef Q_OS_WIN
         , _mfd(new X52ProMFD(this))
 #endif
 {
     _ui->setupUi(this);
 
-
     auto newerThanDate = QDateTime::currentDateTime().addDays(-1);
-    Journal::LiveJournal::instance()->startWatching(newerThanDate, Settings::restoreJournalPath());
+
+    auto liveJournal = Journal::LiveJournal::instance();
+    liveJournal->registerHandler(this);
+    liveJournal->startWatching(newerThanDate, Settings::restoreJournalPath());
 #ifdef Q_OS_WIN
     _ui->mfdStatus->setText("");
     _ui->mfdOutput->setText("");
@@ -33,4 +34,10 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete _ui;
+}
+
+void MainWindow::onEventGeneric(Journal::Event *event) {
+//    qDebug() << "Got event"<<event;
+//    qDebug() <<event->file();
+  //  qDebug() << event->obj();
 }

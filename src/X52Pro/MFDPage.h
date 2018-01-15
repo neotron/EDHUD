@@ -19,34 +19,33 @@
 
 #ifdef Q_OS_WIN
 #include "windows.h"
-#include "Events.h"
+#include "EventDispatch.h"
+
 namespace Journal {
     class JournalFile;
 }
 
 
-class MFDPage : public QObject {
+class MFDPage : public Journal::EventDispatch {
     Q_OBJECT
 public:
 
-    MFDPage(QObject *parent);
+    MFDPage(QObject *parent, DWORD pageId);
 
     QString textForLine(size_t line) const;
     bool stepLine(bool up);
 
     void setLines(const QStringList &lines);
     DWORD numLines() const;
+    virtual bool scrollWheelclick();
 
-    virtual bool update(const Journal::JournalFile &journal, Journal::EventPtr ev) { return false; };
-    virtual bool scrollWheelclick() {
-        if(_currentLine > 0) {
-            _currentLine = 0;
-            return true;
-        }
-        return false;
-    }
+signals:
+    void onChange(DWORD page);
 
 protected:
+    void notifyChange();
+
+    DWORD _pageId;
     int _currentLine{};
     QStringList _lines{};
 };
