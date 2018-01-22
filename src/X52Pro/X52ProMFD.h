@@ -21,7 +21,7 @@
 #include "MFDPage.h"
 #include "deps/SaitekDirectOutput/DirectOutput.h"
 #include "LiveJournal.h"
-#include "Events.h"
+#include "EventDispatchObject.h"
 
 class X52ProMFD: public QObject {
     Q_OBJECT
@@ -58,8 +58,11 @@ private:
 
     void *_device{};
     QMap<DWORD,MFDPage*> _pages{};
-    DWORD _currentPage = -1;
+    DWORD _currentPage = 0xffffffff;
     QTimer _mfdUpdateTimer;
+    QString _commander{};
+
+    void addPage(DWORD pageId, bool forceShow) const;
 };
 
 

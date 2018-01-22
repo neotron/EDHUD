@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QMainWindow>
-#include "EventDispatch.h"
+#include "EventDispatchObject.h"
 
 namespace Ui {
 class MainWindow;

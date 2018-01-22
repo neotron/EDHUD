@@ -3,7 +3,7 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 #ifdef Q_OS_WIN
-#include "X52ProMFD.h"
+#include "X52Pro/X52ProMFD.h"
 #endif
 
 MainWindow::MainWindow(QWidget *parent) 
@@ -14,11 +14,12 @@ MainWindow::MainWindow(QWidget *parent)
 {
     _ui->setupUi(this);
 
+    // Only care about reasonable recent files, but since windows doesn't update dates while Elite is open, go back a lot.
     auto newerThanDate = QDateTime::currentDateTime().addDays(-1);
 
     auto liveJournal = Journal::LiveJournal::instance();
     liveJournal->registerHandler(this);
-    liveJournal->startWatching(newerThanDate, Settings::restoreJournalPath());
+    liveJournal->startWatching(newerThanDate, Settings::restoreJournalPath(), 5);
 #ifdef Q_OS_WIN
     _ui->mfdStatus->setText("");
     _ui->mfdOutput->setText("");

@@ -48,7 +48,7 @@ DWORD MFDPage::numLines() const {
 
 
 MFDPage::MFDPage(QObject *parent, DWORD pageId)
-    : EventDispatch(parent), _pageId(pageId) {
+    : EventDispatchObject(parent), _pageId(pageId) {
     Journal::LiveJournal::instance()->registerHandler(this);
 }
 

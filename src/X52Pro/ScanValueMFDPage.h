@@ -15,33 +15,33 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+
 #pragma once
+
 #include "MFDPage.h"
-#include <QMap>
+struct ScanValueCommanderData : public BaseCommanderData {
+    explicit ScanValueCommanderData(QObject *parent);
 
-#ifdef Q_OS_WIN
-struct MaterialCommanderData : public BaseCommanderData {
-    explicit MaterialCommanderData(QObject *parent);
-
-    QMap<QString,int> materalDeltas{};
-    QStringList changeOrder;
+    int64_t totalValue{};
+    int64_t systemValue{};
+    int64_t lastValue{};
 };
-class MaterialLogMFDPage: public MFDPage, public CommanderState<MaterialCommanderData> {
+
+class ScanValueMFDPage: public MFDPage, public CommanderState<ScanValueCommanderData> {
+    Q_OBJECT
 public:
 
-    MaterialLogMFDPage(QObject *parent, DWORD pageId);
+    ScanValueMFDPage(QObject *parent, DWORD pageId);
 
     bool scrollWheelclick() override;
-
 protected:
-    void onEventGeneric(Journal::Event *event) override;
 
-    void onEventEngineerCraft(Journal::EventEngineerCraft *craft) override;
+    void onEventScan(Journal::EventScan *scan) override;
 
-private:
-    void changeMaterial(const QString &materialName, int64_t delta, MaterialCommanderData *data);
+    void onEventFSDJump(Journal::EventFSDJump *jump) override;
 
-    void updateLines(const MaterialCommanderData *data);
+    void updateLines(const ScanValueCommanderData *data);
+
+    QString format(int64_t value);
 };
 
-#endif

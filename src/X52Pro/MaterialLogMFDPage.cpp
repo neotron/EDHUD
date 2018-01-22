@@ -16,51 +16,56 @@
 //
 
 #include "MaterialLogMFDPage.h"
-#ifdef Q_OS_WIN
 #include <QDebug>
+#ifdef Q_OS_WIN
 #include <Types/Materials.h>
-#include <JournalFile.h>
+#include <JFile.h>
+#include <Events/EventEngineerCraft.h>
 
 using namespace Journal;
 
 MaterialLogMFDPage::MaterialLogMFDPage(QObject *parent, DWORD pageId)
     : MFDPage(parent, pageId) {
-    updateLines();
+    updateLines(nullptr);
 }
 
 //1234567890123456
 //1.82e6K M0.62 R0
 bool MaterialLogMFDPage::scrollWheelclick() {
-    for(auto &id: _materalDeltas.keys()) {
-        _materalDeltas[id] = 0;
+    auto data = dataForCommander(_commander, this);
+    if(!data) {
+        return false;
     }
-    updateLines();
+    for(auto &id: data->materalDeltas.keys()) {
+        data->materalDeltas[id] = 0;
+    }
+    updateLines(data);
     return true;
 }
 
-void MaterialLogMFDPage::changeMaterial(const QString &materialName, int64_t delta) {
+void MaterialLogMFDPage::changeMaterial(const QString &materialName, int64_t delta, MaterialCommanderData *data) {
     if(!delta) { return; }
 
     auto material = Materials::material(materialName);
     if(material.isValid()) {
-        _materalDeltas[materialName] += delta;
-        _changeOrder.removeAll(materialName);
-        _changeOrder.insert(0, materialName);
-        updateLines();
+        data->materalDeltas[materialName] += delta;
+        data->changeOrder.removeAll(materialName);
+        data->changeOrder.insert(0, materialName);
+        updateLines(data);
         notifyChange();
     }
 }
 
-void MaterialLogMFDPage::updateLines() {
+void MaterialLogMFDPage::updateLines(const MaterialCommanderData *data) {
     _currentLine = 0;
-    if(_changeOrder.isEmpty()) {
+    if(!data || data->changeOrder.isEmpty()) {
         // We have nothing yet.
         _lines.append("Material Deltas");
         _lines.append("awaiting changes");
-        _lines.append("click to reset");
+        _lines.append("Click to reset");
     } else {
         _lines.clear();
-        for(const auto &material: _changeOrder) {
+        for(const auto &material: data->changeOrder) {
 
             auto mat = Materials::material(material);
             // 1234567890123456
@@ -76,19 +81,21 @@ void MaterialLogMFDPage::updateLines() {
                     .arg(mat.abbreviation(), -4)
                     .arg(mat.typeName())
                     .arg(mat.rarityName())
-                    .arg(_materalDeltas[material], 3);
+                    .arg(data->materalDeltas[material], 3);
             _lines.append(line);
         }
     }
 }
 
 void MaterialLogMFDPage::onEventGeneric(Event *event) {
+    auto data = dataForEvent(event, this);
+    if(!data) { return; }
     switch(event->journalEvent()) {
         case Event::MaterialCollected:
-            changeMaterial(event->string("Name"), event->integer("Count"));
+            changeMaterial(event->string("Name"), event->integer("Count"), data);
             break;
         case Event::MaterialDiscarded:
-            changeMaterial(event->string("Name"), -event->integer("Count"));
+            changeMaterial(event->string("Name"), -event->integer("Count"), data);
             break;
         case Event::Synthesis:
         default:
@@ -96,4 +103,16 @@ void MaterialLogMFDPage::onEventGeneric(Event *event) {
     }
 }
 
+void MaterialLogMFDPage::onEventEngineerCraft(EventEngineerCraft *event) {
+    auto data = dataForEvent(event, this);
+    if(!data) { return; }
+    for(const auto &mat: event->ingredients()) {
+        changeMaterial(mat.id(), -mat.quantity(), data);
+    }
+}
+
 #endif
+
+MaterialCommanderData::MaterialCommanderData(QObject *parent)
+    : BaseCommanderData(parent) {
+}

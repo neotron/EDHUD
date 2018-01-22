@@ -19,7 +19,7 @@
 #ifdef Q_OS_WIN
 #include <QDebug>
 #include "Events.h"
-#include "JournalFile.h"
+#include "JFile.h"
 using namespace Journal;
 
 #define FMTK(X) ((X) < 10000 ? QString::number(X) : QString("%1k").arg(round((X)/1000.0)))
@@ -27,6 +27,8 @@ using namespace Journal;
 
 
 void ScanMFDPage::onEventGeneric(Event *event) {
+    auto data = dataForEvent(event, this);
+    if(!data) { return; }
     switch(event->journalEvent()) {
         case Event::StartJump:
             if(event->string("JumpType") == "Hyperspace") {
@@ -44,8 +46,8 @@ void ScanMFDPage::onEventGeneric(Event *event) {
             _lines.append("Arrived in:");
             _lines.append(event->file()->system());
             _lines.append("Pending scan...");
-            _history.clear();
-            _currentEntry = 0;
+            data->history.clear();
+            data->currentEntry = 0;
             _currentLine = 0;
             notifyChange();
             break;
@@ -55,13 +57,15 @@ void ScanMFDPage::onEventGeneric(Event *event) {
 }
 
 void ScanMFDPage::onEventScan(EventScan *eventScan) {
+    auto data = dataForEvent(eventScan, this);
+    if(!data) { return; }
     _lines.clear();
     switch(eventScan->bodyType()) {
         case Body::Planet:
-            addScan(eventScan->planet());
+            addScan(eventScan->planet(), data);
             break;
         case Body::Star:
-            addScan(eventScan->star());
+            addScan(eventScan->star(), data);
             break;
         default:
             _lines += eventScan->string("BodyName");
@@ -70,9 +74,9 @@ void ScanMFDPage::onEventScan(EventScan *eventScan) {
             break; // No-op
     }
     _currentLine = _lines.count() > 3 ? 1 : 0; // Hide system name if we hav more than 3 lines
-
-    _history.append(_lines);
-    _currentEntry = _history.size() - 1;
+    qDebug() << "Added scan for commander " << data->commander <<eventScan->file()->commander();
+    data->history.append(_lines);
+    data->currentEntry = data->history.size() - 1;
     notifyChange();
 }
 
@@ -82,31 +86,36 @@ ScanMFDPage::ScanMFDPage(QObject *parent, DWORD pageId)
 }
 
 bool ScanMFDPage::scrollWheelclick() {
-    if(_history.size() <= 1) {
+    auto data = dataForCommander(_commander, this);
+    if(!data) {
+        qDebug() << "No data?";
         return false;
     }
-    _currentEntry++;
-    if(_currentEntry >= _history.size()) {
-        _currentEntry = 0;
+    if(data->history.size() <= 1) {
+        return false;
+    }
+    data->currentEntry++;
+    if(data->currentEntry >= data->history.size()) {
+        data->currentEntry = 0;
     }
     _currentLine = 0;
-    _lines = _history[_currentEntry];
-    qDebug() << "Loaded page"<<_currentEntry<<endl<<_lines;
+    _lines = data->history[data->currentEntry];
     return true;
 }
 
-void ScanMFDPage::addScan(Journal::PlanetPtr planet) {
-    QString line2, line3;
-
+void ScanMFDPage::addScan(Journal::PlanetPtr planet, ScanCommanderData *data) {
     auto gravity = planet->surfaceGravity();
     auto numDigits = 2;
     if(gravity < 1.0) { --numDigits; }
     if(gravity > 99) { --numDigits; }
+
+    _lines += planet->bodyName();
+    QString tmp;
+    QString atmStr;
     switch(planet->atmosphereType()) {
         case Atmosphere::Unknown: // Gas giants etc
         {
-            line2 = planet->typeNameMedium();
-
+            _lines += planet->typeNameMedium();
             auto massEM = planet->mass();
             auto massStr = massEM < 10 ? QString::number(massEM, 'f', 1) : QString::number(massEM, 'f', 0);
             auto radius = planet->radius();
@@ -122,37 +131,40 @@ void ScanMFDPage::addScan(Journal::PlanetPtr planet) {
             // 9.99g M172.2 R1.2
             // 11g M155k R74Mm
             // 11g M1535 R74Mm
-            line3 = QString("%1g M%2 R%3").arg(static_cast<int>(gravity)).arg(massStr).arg(radiusStr);
+            _lines += QString("%1g M%2 R%3").arg(static_cast<int>(gravity)).arg(massStr).arg(radiusStr);
         }
             break;
         default: // normal planets with atmospheres.
+            tmp = planet->typeNameShort();
+            if(planet->isTerraformable()) {
+                tmp += " TF";
+            }
+            tmp += QString(", %1g").arg(QString::number(gravity, 'f', numDigits));
+            _lines += tmp;
             if(planet->landable()) {
-                line3 = "Landable";
-            } else {
-                line3 = planet->atmosphereShort();
+                atmStr = "Landable";
+            } else if(planet->type() != Planet::Earthlike) {
+                // Add atmosphere, if it's not an ELW - ELW just adds "Earth Like" which is kind of pointless.
+                atmStr = planet->atmosphereShort();
             }
-            line2 = planet->typeNameShort();
-            if(planet->terraformState() != TerraformState::None) {
-                line2 += " TF";
-            }
-            line2 += QString(", %1g").arg(QString::number(gravity, 'f', numDigits));
     }
     auto temp = planet->surfaceTemperature();
     auto pressure = planet->surfacePressureBar();
-    auto line4 = QString("%1K").arg(QString::number(temp, temp >= 1000 ? 'g' : 'f', 0));
+    tmp = QString("%1K").arg(QString::number(temp, temp >= 1000 ? 'g' : 'f', 0));
     if(pressure > 0) {
         auto digits = pressure > 1000 ? 2 : 1;
         auto pressureStr = QString(" %1atm").arg(QString::number(pressure, pressure > 1000 ? 'g' : 'f', digits));
-        line4 = QString("%1 %2").arg(line4, -6).arg(pressureStr, -9);
+        tmp = QString("%1 %2").arg(tmp, -6).arg(pressureStr, -9);
     }
-    _lines += planet->bodyName();
-    _lines += line2;
-    _lines += line3;
-    _lines += line4;
-
+    _lines += tmp;
+    _lines += QString("Value: %1").arg(planet->estimatedValue());
+    if(!atmStr.isEmpty()) {
+        _lines += atmStr;
+    }
+    qDebug()<<"New planet"<<_lines;
 }
 
-void ScanMFDPage::addScan(Journal::StarPtr star) {
+void ScanMFDPage::addScan(Journal::StarPtr star, ScanCommanderData *data) {
     auto lum = star->luminosity();
     auto line2 = star->typeNameMedium() + (lum.isEmpty() ? "" : " " + lum);
     if(line2.length() <= 9) {
@@ -174,6 +186,12 @@ void ScanMFDPage::addScan(Journal::StarPtr star) {
         _lines += QString("HZ %1~%2 ls").arg(FMTK(habZone.innerLS())).arg(FMTK(habZone.outerLS()));
     }
     _lines += QString("%1 M%2 R%3").arg(temp).arg(massStr).arg(radiusStr);
+    auto valueStr = QString("Value: %1").arg(star->estimatedValue());
+    _lines += valueStr;
 }
 
 #endif
+
+ScanCommanderData::ScanCommanderData(QObject *parent)
+    : BaseCommanderData(parent) {
+}

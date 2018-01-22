@@ -9,8 +9,8 @@
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 
-SetCompressor lzma
-;SetCompressor zlib
+;SetCompressor lzma
+SetCompressor zlib
 
 ; MUI 1.67 compatible ------
 !include "MUI.nsh"
@@ -50,18 +50,27 @@ InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
 ShowUnInstDetails show
 
+!macro TerminateApp
+  FindWindow $0 "" "${PRODUCT_NAME}"
+  IntCmp $0 0 tm_continue
+  MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION "${PRODUCT_NAME} is running. Terminate process to continue?" /SD IDOK IDOK tm_kill IDCANCEL tm_abort
+tm_abort:
+  Abort
+tm_kill:
+  SendMessage $0 ${WM_CLOSE} 0 0
+tm_continue:
+!macroend
+
 Section "Prerequisites" SEC01
-   SetOutPath $INSTDIR\Prerequisites
-  MessageBox MB_YESNO "${PRODUCT_NAME} requires Visual C++ Redistributable for Visual Studio 2015. Do you want to install it?" /SD IDYES IDNO endActiveSync
-   File "..\output\${PRODUCT_NAME}\vcredist_x64.exe"
-    ExecWait "$INSTDIR\Prerequisites\vcredist_x64.exe"
-    Goto endActiveSync
-   endActiveSync:
+  !insertmacro TerminateApp
+  SetOutPath $INSTDIR\Prerequisites
+  File "..\output\${PRODUCT_NAME}\vcredist_x64.exe"
+  ExecWait "$INSTDIR\Prerequisites\vcredist_x64.exe  /passive /norestart"
 SectionEnd
 
 Section "MainSection" SEC02
 ;  SetOutPath "$INSTDIR\bearer"
-;  SetOverwrite try
+  SetOverwrite try
 ;  File "..\output\${PRODUCT_NAME}\bearer\*.dll"
   SetOutPath "$INSTDIR"
   File "..\output\${PRODUCT_NAME}\${PRODUCT_NAME}.exe"
@@ -106,66 +115,20 @@ Function un.onUninstSuccess
 FunctionEnd
 
 Function un.onInit
-  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "Are you sure you want to completely remove $(^Name) and all of its components?" IDYES +2
+  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "Are you sure you want to completely remove $(^Name) and all of its components?" IDYES uninstall IDNO abort
+abort:
   Abort
+uninstall:
+  !insertmacro TerminateApp
 FunctionEnd
 
 Section Uninstall
-  Delete "$INSTDIR\${PRODUCT_NAME}.url"
-  Delete "$INSTDIR\uninst.exe"
-  Delete "$INSTDIR\translations\qt_uk.qm"
-  Delete "$INSTDIR\translations\qt_sk.qm"
-  Delete "$INSTDIR\translations\qt_ru.qm"
-  Delete "$INSTDIR\translations\qt_pl.qm"
-  Delete "$INSTDIR\translations\qt_lv.qm"
-  Delete "$INSTDIR\translations\qt_ko.qm"
-  Delete "$INSTDIR\translations\qt_ja.qm"
-  Delete "$INSTDIR\translations\qt_it.qm"
-  Delete "$INSTDIR\translations\qt_hu.qm"
-  Delete "$INSTDIR\translations\qt_he.qm"
-  Delete "$INSTDIR\translations\qt_fr.qm"
-  Delete "$INSTDIR\translations\qt_fi.qm"
-  Delete "$INSTDIR\translations\qt_en.qm"
-  Delete "$INSTDIR\translations\qt_de.qm"
-  Delete "$INSTDIR\translations\qt_cs.qm"
-  Delete "$INSTDIR\translations\qt_ca.qm"
-  Delete "$INSTDIR\Qt5Widgets.dll"
-  Delete "$INSTDIR\Qt5Svg.dll"
-  Delete "$INSTDIR\Qt5Network.dll"
-  Delete "$INSTDIR\Qt5Gui.dll"
-  Delete "$INSTDIR\Qt5Core.dll"
-  Delete "$INSTDIR\platforms\qwindows.dll"
-  Delete "$INSTDIR\opengl32sw.dll"
-  Delete "$INSTDIR\libGLESV2.dll"
-  Delete "$INSTDIR\libEGL.dll"
-  Delete "$INSTDIR\imageformats\qwebp.dll"
-  Delete "$INSTDIR\imageformats\qwbmp.dll"
-  Delete "$INSTDIR\imageformats\qtiff.dll"
-  Delete "$INSTDIR\imageformats\qtga.dll"
-  Delete "$INSTDIR\imageformats\qsvg.dll"
-  Delete "$INSTDIR\imageformats\qjpeg.dll"
-  Delete "$INSTDIR\imageformats\qico.dll"
-  Delete "$INSTDIR\imageformats\qicns.dll"
-  Delete "$INSTDIR\imageformats\qgif.dll"
-  Delete "$INSTDIR\imageformats\qdds.dll"
-  Delete "$INSTDIR\iconengines\qsvgicon.dll"
-  Delete "$INSTDIR\${PRODUCT_NAME}.exe"
-  Delete "$INSTDIR\D3Dcompiler_47.dll"
-;  Delete "$INSTDIR\bearer\qnativewifibearer.dll"
-;  Delete "$INSTDIR\bearer\qgenericbearer.dll"
-
   Delete "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk"
   Delete "$SMPROGRAMS\${PRODUCT_NAME}\Website.lnk"
   Delete "$DESKTOP\${PRODUCT_NAME}.lnk"
   Delete "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk"
 
-  RMDir "$SMPROGRAMS\${PRODUCT_NAME}"
-  RMDir "$INSTDIR\translations"
-  RMDir "$INSTDIR\platforms"
-  RMDir "$INSTDIR\imageformats"
-  RMDir "$INSTDIR\iconengines"
-;  RMDir "$INSTDIR\bearer"
-  RMDir "$INSTDIR"
+  RMDir /r  "$INSTDIR\"
 
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
   DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"

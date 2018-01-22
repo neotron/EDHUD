@@ -18,9 +18,9 @@
 
 #include <QApplication>
 #include <QDebug>
-#include "MainWindow.h"
-#include "Theme.h"
-#include "Version.h"
+#include <src/Utility/Version.h>
+#include "UI/MainWindow.h"
+#include "Settings/Theme.h"
 Q_DECLARE_METATYPE(Version);
 #ifdef Q_OS_WIN
 #include <windows.h>

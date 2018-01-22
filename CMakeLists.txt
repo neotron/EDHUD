@@ -50,12 +50,12 @@ find_package(Qt5Network REQUIRED)
 
 add_subdirectory(deps/EDJournalQT)
 
-set(LINK_LIBS ortools Qt5::Core Qt5::Widgets Qt5::Network
-        #Qt5::Concurrent Qt5::TextToSpeech
+set(LINK_LIBS  Qt5::Core Qt5::Widgets Qt5::Network
+        #Qt5::Concurrent Qt5::TextToSpeech ortools
         EDJournalQT)
 
 
-link_directories(${ORTOOLS}/lib)
+#link_directories(${ORTOOLS}/lib)
 
 if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
     set(CMAKE_INCLUDE_SYSTEM_FLAG_CXX "-isystem")
@@ -84,17 +84,16 @@ endif ()
 file(GLOB_RECURSE PATH_FINDER_SRC ${PFDIR}/*.cpp ${PFDIR}/*.h )
 file(GLOB_RECURSE SRC_FILES src/*.cpp src/*.h src/*.ui)
 
-header_directories(INCLUDE_DIRS src/ "${PROJECT_SOURCE_DIR}" )
-
-include_directories(SYSTEM ${ORTOOLS}/include/ )
-include_directories(AFTER ${INCLUDE_DIRS} "deps/EDJournalQT/src")
+include_directories(SYSTEM ${ORTOOLS}/include/ deps/EDJournalQT/src/)
+include_directories(AFTER src)
 add_executable(${PROJECT_NAME} ${OS_BUNDLE} # Expands to WIN32 or MACOS_BUNDLE depending on OS
     ${SRC_FILES} ${META_FILES_TO_INCLUDE} ${RESOURCE_FILES} ${PATH_FINDER_SRC}  ${DOUTPUT}
 )
 
 if  (WIN32)
     # copy dlls.
-    configure_file("deps/SaitekDirectOutput/DirectOutput.dll" "${PROJECT_BINARY_DIR}/DirectOutput.dll" COPYONLY)
+#    configure_file("deps/openssl/ssleay32.dll" "${PROJECT_BINARY_DIR}/" COPYONLY)
+#    configure_file("deps/openssl/libeay32.dll" "${PROJECT_BINARY_DIR}/" COPYONLY)
     add_custom_command(TARGET "${PROJECT_NAME}" POST_BUILD COMMAND "C:/User Programs/Qt/5.9.3/msvc2015_64/bin/windeployqt.exe" --verbose 0 "${PROJECT_NAME}.exe"
             WORKING_DIRECTORY "${PROJECT_BINARY_DIR}")
 endif ()

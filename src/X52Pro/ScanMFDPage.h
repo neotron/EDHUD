@@ -19,9 +19,16 @@
 #include "MFDPage.h"
 #include "Types.h"
 #ifdef Q_OS_WIN
+struct ScanCommanderData : public BaseCommanderData {
+    explicit ScanCommanderData(QObject *parent);
 
-class ScanMFDPage: public MFDPage {
+    int currentEntry{};
+    QList<QStringList> history{};
+};
+
+class ScanMFDPage: public MFDPage, public CommanderState<ScanCommanderData> {
 public:
+
     ScanMFDPage(QObject *parent, DWORD pageId);
 
     bool scrollWheelclick() override;
@@ -32,12 +39,9 @@ protected:
     void onEventGeneric(Journal::Event *event) override;
 
 private:
-    void addScan(Journal::PlanetPtr planet);
-    void addScan(Journal::StarPtr star);
 
-    int _currentEntry{};
-    QList<QStringList> _history{};
-
+    void addScan(Journal::PlanetPtr planet, ScanCommanderData *data);
+    void addScan(Journal::StarPtr star, ScanCommanderData *data);
 };
 
 #endif

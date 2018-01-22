@@ -19,14 +19,52 @@
 
 #ifdef Q_OS_WIN
 #include "windows.h"
-#include "EventDispatch.h"
+#include <EventDispatchObject.h>
+#include <Events/Event.h>
+#include <JFile.h>
+#include <QDebug>
 
-namespace Journal {
-    class JournalFile;
-}
+struct  BaseCommanderData: public QObject {
+    QOBJECT_H
+    explicit BaseCommanderData(QObject *parent = nullptr) : QObject(parent) {}
 
+    QDateTime lastEventTimestamp{};
+    QString commander;
+};
 
-class MFDPage : public Journal::EventDispatch {
+template <typename CommanderData>
+class CommanderState {
+
+protected:
+    QString _commander;
+
+    CommanderData *dataForEvent(const Journal::Event *event, QObject *parent) {
+        auto commander = dataForCommander(event->file()->commander(), parent);
+        if(!commander || commander->lastEventTimestamp > event->timestamp()) {
+            return nullptr;
+        }
+        commander->lastEventTimestamp = event->timestamp();
+        return commander;
+    }
+
+    CommanderData *dataForCommander(const QString &cmdr, QObject *parent) {
+        if(cmdr.isEmpty()) {
+            return nullptr;
+        }
+        _commander = cmdr;
+        if(!_data.contains(cmdr)) {
+            qDebug() << "Creating new storage for cmdr." << cmdr;
+            _data[cmdr] = new CommanderData(parent);
+            _data[cmdr]->commander = cmdr;
+        }
+        return  _data[cmdr];
+    }
+
+private:
+    QMap<QString,CommanderData*> _data;
+};
+
+class MFDPage : public Journal::EventDispatchObject {
     Q_OBJECT
 public:
 
@@ -45,9 +83,12 @@ signals:
 protected:
     void notifyChange();
 
+
     DWORD _pageId;
     int _currentLine{};
     QStringList _lines{};
+
+
 };
 
 
