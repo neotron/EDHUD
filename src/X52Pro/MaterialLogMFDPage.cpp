@@ -54,6 +54,7 @@ void MaterialLogMFDPage::changeMaterial(const QString &materialName, int64_t del
         updateLines(data);
         notifyChange();
     }
+//    qDebug() << data->materalDeltas;
 }
 
 void MaterialLogMFDPage::updateLines(const MaterialCommanderData *data) {

@@ -15,11 +15,11 @@ MainWindow::MainWindow(QWidget *parent)
     _ui->setupUi(this);
 
     // Only care about reasonable recent files, but since windows doesn't update dates while Elite is open, go back a lot.
-    auto newerThanDate = QDateTime::currentDateTime().addDays(-1);
+    auto newerThanDate = QDateTime::currentDateTime().addDays(-1q);
 
     auto liveJournal = Journal::LiveJournal::instance();
     liveJournal->registerHandler(this);
-    liveJournal->startWatching(newerThanDate, Settings::restoreJournalPath(), 5);
+    liveJournal->startWatching(newerThanDate, Settings::restoreJournalPath());
 #ifdef Q_OS_WIN
     _ui->mfdStatus->setText("");
     _ui->mfdOutput->setText("");
