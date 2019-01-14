@@ -64,8 +64,8 @@ tm_continue:
 Section "Prerequisites" SEC01
   !insertmacro TerminateApp
   SetOutPath $INSTDIR\Prerequisites
-  File "..\output\${PRODUCT_NAME}\vcredist_x64.exe"
-  ExecWait "$INSTDIR\Prerequisites\vcredist_x64.exe  /passive /norestart"
+  File "..\output\${PRODUCT_NAME}\vc_redist.x64.exe"
+  ExecWait "$INSTDIR\Prerequisites\vc_redist.x64.exe  /passive /norestart"
 SectionEnd
 
 Section "MainSection" SEC02

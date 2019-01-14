@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "EDHUD"
-!define PRODUCT_VERSION "1.1.0"
+!define PRODUCT_VERSION "1.1.1"
 !define PRODUCT_PUBLISHER "David Hedbor"
 !define PRODUCT_WEB_SITE "https://github.com/neotron/EDHUD"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\${PRODUCT_NAME}.exe"
@@ -64,8 +64,8 @@ tm_continue:
 Section "Prerequisites" SEC01
   !insertmacro TerminateApp
   SetOutPath $INSTDIR\Prerequisites
-  File "..\output\${PRODUCT_NAME}\vcredist_x64.exe"
-  ExecWait "$INSTDIR\Prerequisites\vcredist_x64.exe  /passive /norestart"
+  File "..\output\${PRODUCT_NAME}\vc_redist.x64.exe"
+  ExecWait "$INSTDIR\Prerequisites\vc_redist.x64.exe  /passive /norestart"
 SectionEnd
 
 Section "MainSection" SEC02
