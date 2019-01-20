@@ -22,16 +22,18 @@
 #include "ScanMFDPage.h"
 #include "MaterialLogMFDPage.h"
 #include "ScanValueMFDPage.h"
+#include "ScanSummaryMFDPage.h"
 
 #define MASK(X, Y) (((X)&(Y)) == Y)
 #define ROK(X) ((res = X) == S_OK)
 
 using namespace Journal;
 
-const DWORD kScanSummaryPage = 0;
-const DWORD kMaterialLogPage = 1;
-const DWORD kScanValuePage = 2;
-const DWORD kHelpPage = 3;
+const DWORD kScanOverviewPage = 0;
+const DWORD kScanDetailPage = 1;
+const DWORD kMaterialLogPage = 2;
+const DWORD kScanValuePage = 3;
+const DWORD kHelpPage = 4;
 
 void X52ProMFD::initializeMFD() {
 
@@ -174,7 +176,8 @@ void X52ProMFD::addPage(DWORD pageId, bool forceShow) const {
 }
 
 void X52ProMFD::createPages() {
-    _pages[kScanSummaryPage] = new ScanMFDPage(this, kScanSummaryPage);
+    _pages[kScanOverviewPage] = new ScanSummaryMFDPage(this, kScanOverviewPage);
+    _pages[kScanDetailPage] = new ScanMFDPage(this, kScanDetailPage);
     _pages[kScanValuePage] = new ScanValueMFDPage(this, kScanValuePage);
     _pages[kMaterialLogPage] = new MaterialLogMFDPage(this, kMaterialLogPage);
     QFile help(":/MFDHelp.txt");

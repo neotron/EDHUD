@@ -22,9 +22,6 @@
 #include "JFile.h"
 using namespace Journal;
 
-#define FMTK(X) ((X) < 10000 ? QString::number(X) : QString("%1k").arg(round((X)/1000.0)))
-
-
 
 void ScanMFDPage::onEventGeneric(Event *event) {
     auto data = dataForEvent(event, this);

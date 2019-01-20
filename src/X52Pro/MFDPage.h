@@ -24,6 +24,8 @@
 #include <JFile.h>
 #include <QDebug>
 
+#define FMTK(X) ((X) < 10000 ? QString::number(X) : QString("%1k").arg(round((X)/1000.0)))
+
 struct  BaseCommanderData: public QObject {
     QOBJECT_H
     explicit BaseCommanderData(QObject *parent = nullptr) : QObject(parent) {}
