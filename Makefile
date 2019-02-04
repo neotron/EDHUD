@@ -19,13 +19,5 @@ win-package:
 	cp cmake-build-minsizerel/EDHUD.exe output/EDHUD
 	cp cmake-build-minsizerel/DirectOutput.dll output/EDHUD
 	rm -f wininstall/*.exe
-	env VCINSTALLDIR="C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC" /cygdrive/c/User\ Programs/Qt/${QT}/msvc2017_64/bin/windeployqt.exe output/EDHUD/EDHUD.exe
+	/cygdrive/c/User\ Programs/Qt/${QT}/msvc2017_64/bin/windeployqt.exe output/EDHUD/EDHUD.exe
 	(cd wininstall && /cygdrive/c/Program\ Files\ \(x86\)/NSIS/makensis.exe installer.nsi)
-
-win-package-bash: 
-	rm -rf output/EDPathFinder
-	mkdir -p output/EDPathFinder
-	cp ../build-EliteTSP-Desktop_Qt_${QTUS}_MSVC2015_64bit-Minimum\ Size\ Release/EDPathFinder.exe output/EDPathFinder
-	rm -f wininstall/*.exe
-	(export VCINSTALLDIR="C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC"; /mnt/c/User\ Programs/Qt/${QT}/msvc2017_64/bin/windeployqt.exe output/EDPathFinder/EDPathFinder.exe)
-	(cd wininstall && /mnt/c/Program\ Files\ \(x86\)/NSIS/makensis.exe installer.nsi)

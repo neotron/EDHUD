@@ -94,6 +94,6 @@ if  (WIN32)
     # copy dlls.
 #    configure_file("deps/openssl/ssleay32.dll" "${PROJECT_BINARY_DIR}/" COPYONLY)
 #    configure_file("deps/openssl/libeay32.dll" "${PROJECT_BINARY_DIR}/" COPYONLY)
-    add_custom_command(TARGET "${PROJECT_NAME}" POST_BUILD COMMAND "C:/User Programs/Qt/5.9.3/msvc2015_64/bin/windeployqt.exe" --verbose 0 "${PROJECT_NAME}.exe"
+    add_custom_command(TARGET "${PROJECT_NAME}" POST_BUILD COMMAND "C:/User Programs/Qt/${Qt5Widgets_VERSION}/msvc2017_64/bin/windeployqt.exe" --verbose 0 "${PROJECT_NAME}.exe"
             WORKING_DIRECTORY "${PROJECT_BINARY_DIR}")
 endif ()
