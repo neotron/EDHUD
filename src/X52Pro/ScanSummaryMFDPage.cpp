@@ -87,7 +87,14 @@ void ScanSummaryMFDPage::updateLines(const ScanSummaryCommanderData *data) {
             valuables += QString("E%1 ").arg(data->elw);
         }
         if(data->ww || data->wwtf) {
-            valuables += QString("w%1:%2 ").arg(data->ww).arg(data->wwtf);
+            valuables += "W";
+            if(data->ww) {
+                valuables += QString("%1").arg(data->ww);
+            }
+            if(data->wwtf) {
+                valuables += QString("T%1").arg(data->wwtf);
+            }
+            valuables += " ";
         }
         if(data->aw) {
             valuables += QString("A%1 ").arg(data->aw);
