@@ -30,3 +30,4 @@ src/buildnumber.h
 output
 /.idea/workspace.xml
 /wininstall/installer.nsi
+/Makefile
