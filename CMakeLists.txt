@@ -15,11 +15,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(MSVC_RUNTIME "dynamicmak")
 
-file(WRITE src/buildnumber.h "#pragma once
-#define PROJECT_VERSION \"${PROJECT_VERSION}\"
-#define LPROJECT_VERSION L\"${PROJECT_VERSION}\"
-")
-
 fix_project_version()
 configure_msvc_runtime()
 
@@ -89,6 +84,9 @@ include_directories(AFTER src)
 add_executable(${PROJECT_NAME} ${OS_BUNDLE} # Expands to WIN32 or MACOS_BUNDLE depending on OS
     ${SRC_FILES} ${META_FILES_TO_INCLUDE} ${RESOURCE_FILES} ${PATH_FINDER_SRC}  ${DOUTPUT}
 )
+
+configure_file("${PROJECT_SOURCE_DIR}/Makefile.in"  "${PROJECT_SOURCE_DIR}/Makefile")
+configure_file("${PROJECT_SOURCE_DIR}/src/buildnumber.h.in" "${PROJECT_BINARY_DIR}/buildnumber.h")
 
 if  (WIN32)
     # copy dlls.

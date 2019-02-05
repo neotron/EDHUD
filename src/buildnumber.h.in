@@ -1,0 +1,3 @@
+#pragma once
+#define PROJECT_VERSION "1.2.1"
+#define LPROJECT_VERSION L"1.2.1"
