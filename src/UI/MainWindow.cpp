@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     _ui->setupUi(this);
 
     // Only care about reasonable recent files, but since windows doesn't update dates while Elite is open, go back a lot.
-    auto newerThanDate = QDateTime::currentDateTime().addDays(-1);
+    auto newerThanDate = QDateTime::currentDateTime().addDays(-7);
 
     auto liveJournal = Journal::LiveJournal::instance();
     liveJournal->registerHandler(this);

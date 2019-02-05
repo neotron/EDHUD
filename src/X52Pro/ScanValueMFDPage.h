@@ -25,6 +25,7 @@ struct ScanValueCommanderData : public BaseCommanderData {
     int64_t totalValue{};
     int64_t systemValue{};
     int64_t lastValue{};
+    QMap<QString,int64_t> scannedBodies;
 };
 
 class ScanValueMFDPage: public MFDPage, public CommanderState<ScanValueCommanderData> {
@@ -39,6 +40,8 @@ protected:
     void onEventScan(Journal::EventScan *scan) override;
 
     void onEventFSDJump(Journal::EventFSDJump *jump) override;
+
+    void onEventSAAScanComplete(Journal::EventSAAScanComplete *complete) override;
 
     void updateLines(const ScanValueCommanderData *data);
 

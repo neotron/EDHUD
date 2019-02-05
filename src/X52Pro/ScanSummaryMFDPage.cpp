@@ -48,9 +48,9 @@ void ScanSummaryMFDPage::onEventScan(Journal::EventScan *scan) {
             break;
         case Body::Star:
             // Only use first star for habitable zone checking.
-            if(!data->hasBodies && !scan->star()->bodyId()) {
+            if(!data->primaryStarScanned && !scan->star()->bodyId()) {
                 addScan(scan->star(), data);
-                data->hasBodies = true;
+                data->primaryStarScanned = true;
             }
             break;
         default:
@@ -64,8 +64,9 @@ void ScanSummaryMFDPage::onEventScan(Journal::EventScan *scan) {
 void ScanSummaryMFDPage::onEventFSDJump(Journal::EventFSDJump *jump) {
     auto data = dataForEvent(jump, this);
     if(!data) { return; }
-    data->hasBodies = false;
+    data->primaryStarScanned = false;
     data->tf = data->wwtf = data->ww = data->elw = data->aw = 0;
+    data->hz = "HZ: Star not scanned.";
     data->systemValue = 0;
     data->scannedBodies.clear();
     _lines.clear();
@@ -73,13 +74,14 @@ void ScanSummaryMFDPage::onEventFSDJump(Journal::EventFSDJump *jump) {
     _lines.append(jump->file()->system());
     _lines.append("Pending scan...");
     _currentLine = 0;
+
     notifyChange();
 }
 
 void ScanSummaryMFDPage::updateLines(const ScanSummaryCommanderData *data) {
     _lines.clear();
     _currentLine = 0;
-    if(data->hasBodies) {
+    if(data->primaryStarScanned || !data->scannedBodies.empty()) {
         _lines += data->hz;
         _lines += QString("System: %1").arg(format(data->systemValue));
         QString valuables;

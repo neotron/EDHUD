@@ -23,7 +23,7 @@
 
 struct ScanSummaryCommanderData : public BaseCommanderData {
     explicit ScanSummaryCommanderData(QObject *parent);
-    bool hasBodies{};
+    bool primaryStarScanned{};
     int64_t systemValue{};
     uint8_t tf{};
     uint8_t wwtf{};

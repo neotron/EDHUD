@@ -16,7 +16,7 @@
 //
 
 #pragma once
-#define RELEASE_URL     QUrl("https://github.com/neotron/EDPathFinder/releases/latest")
+#define RELEASE_URL     QUrl("https://github.com/neotron/EDHUD/releases/latest")
 
 
 #define AUTO_UPDATE_VERSION_KEY "AutoUpdateVersion"

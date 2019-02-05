@@ -17,6 +17,7 @@
 
 #include <Events/EventScan.h>
 #include <Events/EventFSDJump.h>
+#include <Events/EventSAAScanComplete.h>
 #include "ScanValueMFDPage.h"
 
 ScanValueMFDPage::ScanValueMFDPage(QObject *parent, DWORD pageId)
@@ -34,7 +35,19 @@ bool ScanValueMFDPage::scrollWheelclick() {
 void ScanValueMFDPage::onEventScan(Journal::EventScan *scan) {
     auto data = dataForEvent(scan, this);
     if(!data) { return; }
-    data->lastValue = scan->estimatedValue();
+    auto value(scan->estimatedValue());
+    switch(scan->bodyType()) {
+        case Journal::Body::Planet:
+            if(data->scannedBodies.contains(scan->planet()->bodyName())) {
+                return;
+            }
+            data->scannedBodies[scan->planet()->bodyName()] = value;
+            break;
+        default:
+            break;
+
+    }
+    data->lastValue = value;
     data->systemValue += data->lastValue;
     data->totalValue += data->lastValue;
     updateLines(data);
@@ -44,6 +57,7 @@ void ScanValueMFDPage::onEventScan(Journal::EventScan *scan) {
 void ScanValueMFDPage::onEventFSDJump(Journal::EventFSDJump *jump) {
     auto data = dataForEvent(jump, this);
     if(!data) { return; }
+    data->scannedBodies.clear();
     data->systemValue = 0;
     updateLines(data);
     notifyChange();
@@ -64,6 +78,16 @@ QString ScanValueMFDPage::format(int64_t value) {
     } else {
         return QString("%1M").arg(value/1000000.0, 5, 'f', 2);
     }
+}
+
+void ScanValueMFDPage::onEventSAAScanComplete(Journal::EventSAAScanComplete *event) {
+    auto data = dataForEvent(event, this);
+    if(!data) { return; }
+    const auto bonusValue = data->scannedBodies[event->bodyName()] * 3;
+    data->systemValue += bonusValue; // estimated 3x additional value.
+    updateLines(data);
+    notifyChange();
+
 }
 
 ScanValueCommanderData::ScanValueCommanderData(QObject *parent)

@@ -101,6 +101,7 @@ bool ScanMFDPage::scrollWheelclick() {
 }
 
 void ScanMFDPage::addScan(Journal::PlanetPtr planet, ScanCommanderData *data) {
+
     auto gravity = planet->surfaceGravity();
     auto numDigits = 2;
     if(gravity < 1.0) { --numDigits; }
