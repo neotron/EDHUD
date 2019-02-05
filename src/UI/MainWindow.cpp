@@ -2,6 +2,7 @@
 #include "Settings/Settings.h"
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
+#include "Utility/AutoUpdateChecker.h"
 #ifdef Q_OS_WIN
 #include "X52Pro/X52ProMFD.h"
 #endif
@@ -15,11 +16,17 @@ MainWindow::MainWindow(QWidget *parent)
     _ui->setupUi(this);
 
     // Only care about reasonable recent files, but since windows doesn't update dates while Elite is open, go back a lot.
-    auto newerThanDate = QDateTime::currentDateTime().addDays(-7);
+    auto newerThanDate = QDateTime::currentDateTime().addDays(-1);
 
     auto liveJournal = Journal::LiveJournal::instance();
     liveJournal->registerHandler(this);
     liveJournal->startWatching(newerThanDate, Settings::restoreJournalPath());
+#if 0
+    auto updater(new AutoUpdateChecker(this));
+    connect(updater, &QThread::finished, updater, &QObject::deleteLater);
+    connect(updater, SIGNAL(newVersionAvailable(const Version &)), this, SLOT(showVersionUpdateDialog(const Version &)));
+    updater->start();
+#endif
 #ifdef Q_OS_WIN
     _ui->mfdStatus->setText("");
     _ui->mfdOutput->setText("");
