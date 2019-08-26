@@ -41,7 +41,7 @@ void ScanValueMFDPage::onEventScan(Journal::EventScan *scan) {
             if(data->scannedBodies.contains(scan->planet()->bodyName())) {
                 return;
             }
-            data->scannedBodies[scan->planet()->bodyName()] = value;
+            data->scannedBodies[scan->planet()->bodyName()] = scan->planet();
             break;
         default:
             break;
@@ -59,6 +59,8 @@ void ScanValueMFDPage::onEventFSDJump(Journal::EventFSDJump *jump) {
     if(!data) { return; }
     data->scannedBodies.clear();
     data->systemValue = 0;
+    data->numJumps++;
+    data->totalLY += jump->jumpDist();
     updateLines(data);
     notifyChange();
 }
@@ -69,6 +71,14 @@ void ScanValueMFDPage::updateLines(const ScanValueCommanderData *data) {
     _lines += QString("Total: %1").arg(format(data->totalValue));
     _lines += QString("System: %1").arg(format(data->systemValue));
     _lines += QString("Last: %1").arg(data->lastValue);
+    double jumpDist = data->totalLY;
+    QString jumpUnit = "ly";
+    if(jumpDist > 1000) {
+        jumpDist /= 1000;
+        jumpUnit = "kly";
+    }
+    _lines += QString("Num Jumps: %1").arg(data->numJumps);
+    _lines += QString("Dist: %1%2").arg(jumpDist, 4, 'f', 1).arg(jumpUnit);
     qDebug() << _lines;
 }
 
@@ -83,8 +93,14 @@ QString ScanValueMFDPage::format(int64_t value) {
 void ScanValueMFDPage::onEventSAAScanComplete(Journal::EventSAAScanComplete *event) {
     auto data = dataForEvent(event, this);
     if(!data) { return; }
-    const auto bonusValue = data->scannedBodies[event->bodyName()] * 3;
-    data->systemValue += bonusValue; // estimated 3x additional value.
+    auto planet(data->scannedBodies[event->bodyName()]);
+    if(!planet) { return; }
+    auto value = planet->estimatedValue();
+    planet->setIsMapped(true);
+    planet->setIsEfficient(event->efficiencyTargetMet());
+    auto valueDelta = planet->estimatedValue() - value;
+    data->systemValue += valueDelta; // estimated 3x additional value.
+    data->totalValue += valueDelta;
     updateLines(data);
     notifyChange();
 

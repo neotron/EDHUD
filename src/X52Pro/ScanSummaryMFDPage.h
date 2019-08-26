@@ -32,7 +32,7 @@ struct ScanSummaryCommanderData : public BaseCommanderData {
     uint8_t aw{};
     int64_t lastValue{};
     QString hz;
-    QMap<QString,int64_t> scannedBodies;
+    QMap<QString,Journal::PlanetPtr> scannedBodies;
 };
 
 class ScanSummaryMFDPage: public MFDPage, public CommanderState<ScanSummaryCommanderData> {
@@ -54,9 +54,9 @@ protected:
 
     void updateLines(const ScanSummaryCommanderData *data);
 
-    void addScan(Journal::PlanetPtr planet, ScanSummaryCommanderData *data);
+    static void addScan(const Journal::PlanetPtr& planet, ScanSummaryCommanderData *data);
 
-    void addScan(Journal::StarPtr star, ScanSummaryCommanderData *data);
+    static void addScan(const Journal::StarPtr& star, ScanSummaryCommanderData *data);
 
     QString format(int64_t value);
 };

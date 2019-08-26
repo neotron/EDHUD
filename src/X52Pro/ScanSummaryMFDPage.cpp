@@ -108,7 +108,7 @@ void ScanSummaryMFDPage::updateLines(const ScanSummaryCommanderData *data) {
     } else {
         _lines += QString("Pending scan...");
     }
-    qDebug() << _lines;
+    //qDebug() << _lines;
 }
 
 QString ScanSummaryMFDPage::format(int64_t value) {
@@ -119,8 +119,8 @@ QString ScanSummaryMFDPage::format(int64_t value) {
     }
 }
 
-void ScanSummaryMFDPage::addScan(Journal::PlanetPtr planet, ScanSummaryCommanderData *data) {
-    data->scannedBodies[planet->bodyName()] = data->lastValue;
+void ScanSummaryMFDPage::addScan(const Journal::PlanetPtr& planet, ScanSummaryCommanderData *data) {
+    data->scannedBodies[planet->bodyName()] = planet;
     switch(planet->type()) {
         case Planet::Earthlike:
             data->elw ++;
@@ -143,7 +143,7 @@ void ScanSummaryMFDPage::addScan(Journal::PlanetPtr planet, ScanSummaryCommander
     }
 }
 
-void ScanSummaryMFDPage::addScan(Journal::StarPtr star, ScanSummaryCommanderData *data) {
+void ScanSummaryMFDPage::addScan(const Journal::StarPtr& star, ScanSummaryCommanderData *data) {
     auto habZone = star->habitableZone();
     if(habZone.isValid()) {
         data->hz = QString("HZ %1~%2 ls").arg(FMTK(habZone.innerLS())).arg(FMTK(habZone.outerLS()));
@@ -156,9 +156,12 @@ void ScanSummaryMFDPage::addScan(Journal::StarPtr star, ScanSummaryCommanderData
 void ScanSummaryMFDPage::onEventSAAScanComplete(EventSAAScanComplete *event) {
     auto data = dataForEvent(event, this);
     if(!data) { return; }
-    const auto bonusValue = data->scannedBodies[event->bodyName()] * 3;
-    qDebug() << "SAA scan" << event->bodyName() << bonusValue;
-    data->systemValue += bonusValue; // estimated 3x additional value.
+    auto planet(data->scannedBodies[event->bodyName()]);
+    if(!planet) { return; }
+    auto value = planet->estimatedValue();
+    planet->setIsMapped(true);
+    planet->setIsEfficient(event->efficiencyTargetMet());
+    data->systemValue += planet->estimatedValue() - value;
     updateLines(data);
     notifyChange();
 

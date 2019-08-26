@@ -25,7 +25,9 @@ struct ScanValueCommanderData : public BaseCommanderData {
     int64_t totalValue{};
     int64_t systemValue{};
     int64_t lastValue{};
-    QMap<QString,int64_t> scannedBodies;
+    double totalLY{};
+    int numJumps{};
+    QMap<QString,Journal::PlanetPtr> scannedBodies;
 };
 
 class ScanValueMFDPage: public MFDPage, public CommanderState<ScanValueCommanderData> {
